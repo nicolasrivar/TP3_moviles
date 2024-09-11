@@ -1,5 +1,7 @@
 package com.example.tp3movilesulp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else if (item.getItemId() == R.id.nav_salir) {
-                    finish();
+                    mostrarDialogoSalir();
                 }
 
                 drawerLayout.closeDrawers();
@@ -66,5 +68,25 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.fragmentContainer, new ListarNotasFragment())
                     .commit();
         }
+
+    }
+
+    private void mostrarDialogoSalir() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar salida")
+                .setMessage("¿Estás seguro de que deseas salir?")
+                .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
 }
